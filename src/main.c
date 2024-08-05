@@ -87,7 +87,7 @@ int main(int argc, char **argv) {
     if (opts.literal) {
         workers_len--;
     }
-    if (opts.workers && opts.workers <= num_cores) {
+    if (opts.workers && opts.workers < workers_len) {
         workers_len = opts.workers;
     }
     if (workers_len < 1) {
