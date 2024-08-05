@@ -81,11 +81,13 @@ int main(int argc, char **argv) {
     num_cores = (int)sysconf(_SC_NPROCESSORS_ONLN);
 #endif
 
-    workers_len = num_cores < 8 ? num_cores : 8;
+#define MAX_WORKERS (5)
+
+    workers_len = num_cores < MAX_WORKERS ? num_cores : MAX_WORKERS;
     if (opts.literal) {
         workers_len--;
     }
-    if (opts.workers) {
+    if (opts.workers && opts.workers <= MAX_WORKERS) {
         workers_len = opts.workers;
     }
     if (workers_len < 1) {
